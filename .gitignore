@@ -1,0 +1,14 @@
+*.o
+tnf-infoscreen
+moc_*.cpp
+moc_*.h
+moc_*.json
+qrc_*.cpp
+.qmake.stash
+*_qml.cpp
+*.qmltypes
+*.qrc
+*_metatypes.json
+*_qmltyperegistrations.cpp
+Makefile
+qmlcache_loader.cpp
