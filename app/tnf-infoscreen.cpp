@@ -6,7 +6,7 @@ int main(int argc, char **argv) {
 	QGuiApplication app(argc, argv);
 
 	QQuickView *view = new QQuickView;
-	view->setSource(QUrl("qrc:/tnf-infoscreen.qml"));
+	view->loadFromModule("TnfInfoscreen", "TnfInfoscreen");
 	view->setResizeMode(QQuickView::SizeRootObjectToView);
 	view->showFullScreen();
 

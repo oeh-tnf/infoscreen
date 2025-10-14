@@ -1,6 +1,6 @@
 #pragma once
 
-#include <QQmlEngine>
+#include <QtQml/qqmlregistration.h>
 #include <Qt>
 #include <QAbstractTableModel>
 #include <QModelIndex>

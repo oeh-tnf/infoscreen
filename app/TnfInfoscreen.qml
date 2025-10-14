@@ -1,6 +1,5 @@
 import QtQuick 6.0
 import QtQuick.Controls 6.0
-import oeh.jku.tnf.infoscreen 1
 
 Item {    
 	LinzAGDepartureSource {
