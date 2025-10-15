@@ -6,6 +6,7 @@
 #include <QQuickItem>
 #include <QConcatenateTablesProxyModel>
 #include <QTimer>
+#include <QFont>
 
 #include "DeparturesSortFilterProxyModel.hpp"
 #include "LinzagDepartureModel.hpp"
@@ -20,6 +21,10 @@ int main(int argc, char **argv) {
 	using namespace std::literals;
 
 	QGuiApplication app(argc, argv);
+
+	QFont font("Red Hat Display");
+	font.setFeature("tnum", 1);
+	app.setFont(font);
 
 	CurrentTime *time = new CurrentTime();
 

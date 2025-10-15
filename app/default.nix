@@ -1,4 +1,4 @@
-{ stdenv, qtbase, qtdeclarative, cmake, wrapQtAppsHook, qttools }:
+{ stdenv, qtbase, qtdeclarative, cmake, wrapQtAppsHook, qttools, redhat-official-fonts }:
 
 stdenv.mkDerivation {
   pname = "tnf-infoscreen";
@@ -9,6 +9,7 @@ stdenv.mkDerivation {
   buildInputs = [
     qtbase
     qtdeclarative
+    redhat-official-fonts
   ];
   nativeBuildInputs = [
     cmake
