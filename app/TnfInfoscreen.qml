@@ -1,7 +1,11 @@
 import QtQuick 6.0
 import QtQuick.Controls 6.0
 
-Item {    
+Item {
+	id: root
+
+	required property var time
+
 	LinzAGDepartureSource {
 		id: linzag_source_uni
 		stopId: "at:44:41101"
@@ -23,6 +27,7 @@ Item {
 		model: LinzAGDepartureModel {
 			id: linzag_model_uni
 			json: linzag_source_uni.json
+			now: root.time
 		}
 		
 		property var columnAlignments: [Text.AlignHCenter, Text.AlignLeft, Text.AlignRight]
@@ -51,14 +56,6 @@ Item {
 		}
 		
 		rowHeightProvider: (row) => 100 
-	}
-
-	Timer {
-		interval: 1000
-		running: true
-		repeat: true
-		triggeredOnStart: true
-		onTriggered: { linzag_model_uni.now = new Date() }
 	}
 }
 

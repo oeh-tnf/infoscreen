@@ -11,6 +11,7 @@ qt_standard_project_setup(REQUIRES 6.5)
 
 qt_add_executable(tnf-infoscreen
     tnf-infoscreen.cpp
+    CurrentTime.cpp
 )
 
 qt_add_qml_module(tnf-infoscreen
