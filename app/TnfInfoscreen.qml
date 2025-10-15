@@ -7,7 +7,11 @@ ColumnLayout {
 
 	required property var time
 	required property var departures
+	required property var jku_mensa
+	required property var khg_mensa
 
+	spacing: 0
+	
 	Rectangle {
 		Layout.fillWidth: true
 		Layout.preferredHeight: 80;
@@ -31,47 +35,173 @@ ColumnLayout {
 				font.pointSize: 30
 				verticalAlignment: Text.AlignVCenter
 
-				text: root.time.toLocaleTimeString("de-AT")
+				text: root.time.time.toLocaleTimeString("de-AT")
 			}
 		}
 	}
 
-	TableView {
-		id: departure_table
-
+	RowLayout {
 		Layout.fillWidth: true
 		Layout.fillHeight: true
 
-		animate: false
-		
-		model: root.departures
-		
-		property var columnAlignments: [Text.AlignHCenter, Text.AlignLeft, Text.AlignRight]
-		
-		delegate: Rectangle {
-			color: row % 2 == 0 ? "#ffffff" : "#efefef"
+		spacing: 0
+
+		TableView {
+			id: departure_table
+
+			Layout.fillHeight: true
+			Layout.fillWidth: true
+
+			animate: false
+			clip: true
 			
-			Text {
-				anchors.fill: parent
-				text: display
-				padding: 20
-				font.pointSize: 40
-				verticalAlignment: Text.AlignVCenter
-				horizontalAlignment: departure_table.columnAlignments[column]
+			model: root.departures
+			
+			property var columnAlignments: [Text.AlignHCenter, Text.AlignLeft, Text.AlignRight]
+			
+			delegate: Rectangle {
+				color: row % 2 == 0 ? "#ffffff" : "#efefef"
+				
+				Text {
+					anchors.fill: parent
+					text: display
+					padding: 20
+					font.pointSize: 40
+					verticalAlignment: Text.AlignVCenter
+					horizontalAlignment: departure_table.columnAlignments[column]
+				}
 			}
+			
+			columnWidthProvider: (column) => {
+				if (column == 0) {
+					return 150;
+				} else if (column == 1) {
+					return departure_table.width - 150 - 150;
+				} else if (column == 2) {
+					return 150;
+				}
+			}
+			
+			rowHeightProvider: (row) => 100 
 		}
 		
-		columnWidthProvider: (column) => {
-			if (column == 0) {
-				return 150;
-			} else if (column == 1) {
-				return departure_table.width - 150 - 150;
-			} else if (column == 2) {
-				return 150;
+		StackLayout {
+			Layout.fillHeight: true
+			Layout.fillWidth: true
+
+			ColumnLayout {
+				spacing: 0
+
+				Rectangle {
+					Layout.fillWidth: true
+					Layout.fillHeight: true
+					
+					color: "#fbb601"
+					ColumnLayout {
+						anchors.fill: parent
+						
+						Text {
+							Layout.fillWidth: true
+
+							padding: 20
+
+							color: "#ffffff"
+							font.weight: Font.Bold
+							font.pointSize: 30
+							
+							text: "JKU Mensa"
+						}
+						
+						ListView {
+							id: jku_mensa_menu
+							
+							Layout.fillWidth: true
+							Layout.fillHeight: true
+							
+							spacing: 20
+							
+							model: jku_mensa
+							
+							delegate: Rectangle {
+								anchors.left: parent.left
+								anchors.right: parent.right
+								anchors.leftMargin: 20
+								anchors.rightMargin: 20
+								
+								height: (jku_mensa_menu.height - 20 - 20 * (jku_mensa_menu.count-1)) / jku_mensa_menu.count
+								
+								radius: 20
+								color: "#ffffff"
+								
+								Text {
+									anchors.fill: parent
+									verticalAlignment: Text.AlignVCenter
+									padding: 30
+									color: "#000000"
+									font.pointSize: 20
+									text: display
+								}
+							}
+						}
+					}
+				}
+				
+				Rectangle {
+					Layout.fillWidth: true
+					Layout.fillHeight: true
+					
+					color: "#ac1410"
+					
+					ColumnLayout {
+						anchors.fill: parent
+
+						Text {
+							Layout.fillWidth: true
+
+							padding: 20
+
+							color: "#ffffff"
+							font.weight: Font.Bold
+							font.pointSize: 30
+							
+							text: "KHG Mensa"
+						}
+						
+						ListView {
+							id: khg_mensa_menu
+							
+							Layout.fillWidth: true
+							Layout.fillHeight: true
+							
+							spacing: 20
+							
+							model: khg_mensa
+							
+							delegate: Rectangle {
+								anchors.left: parent.left
+								anchors.right: parent.right
+								anchors.leftMargin: 20
+								anchors.rightMargin: 20
+								
+								height: (khg_mensa_menu.height - 20 - 20 * (khg_mensa_menu.count-1)) / khg_mensa_menu.count
+								
+								radius: 20
+								color: "#ffffff"
+								
+								Text {
+									anchors.fill: parent
+									verticalAlignment: Text.AlignVCenter
+									padding: 30
+									color: "#000000"
+									font.pointSize: 20
+									text: display
+								}
+							}
+						}
+					}
+				}
 			}
 		}
-		
-		rowHeightProvider: (row) => 100 
 	}
 }
 

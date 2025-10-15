@@ -15,6 +15,8 @@ qt_add_executable(tnf-infoscreen
     DeparturesSortFilterProxyModel.cpp
     LinzagDepartureModel.cpp
     LinzagDepartureSource.cpp
+    MensaMenuModel.cpp
+    MensaMenuSource.cpp
     OoevvDepartureModel.cpp
     OoevvDepartureSource.cpp
 )

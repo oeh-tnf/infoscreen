@@ -10,6 +10,8 @@
 #include "DeparturesSortFilterProxyModel.hpp"
 #include "LinzagDepartureModel.hpp"
 #include "LinzagDepartureSource.hpp"
+#include "MensaMenuModel.hpp"
+#include "MensaMenuSource.hpp"
 #include "OoevvDepartureModel.hpp"
 #include "OoevvDepartureSource.hpp"
 #include "CurrentTime.hpp"
@@ -44,25 +46,35 @@ int main(int argc, char **argv) {
 	DeparturesSortFilterProxyModel *departuresModel = new DeparturesSortFilterProxyModel();
 	departuresModel->setSourceModel(allDeparturesModel);
 	departuresModel->sort(2);
+	
+	MensaMenuSource *mensaSource = new MensaMenuSource();
+
+	MensaMenuModel *jkuMensaModel = new MensaMenuModel();
+	QObject::connect(mensaSource, SIGNAL(jkuJsonChanged(QJsonObject)), jkuMensaModel, SLOT(setJson(QJsonObject)));
+
+	MensaMenuModel *khgMensaModel = new MensaMenuModel();
+	QObject::connect(mensaSource, SIGNAL(khgJsonChanged(QJsonObject)), khgMensaModel, SLOT(setJson(QJsonObject)));
 
 	QTimer *reloadTimer = new QTimer();
 	QObject::connect(reloadTimer, SIGNAL(timeout()), linzagSource, SLOT(load()));
 	QObject::connect(reloadTimer, SIGNAL(timeout()), ooevvSource, SLOT(load()));
+	QObject::connect(reloadTimer, SIGNAL(timeout()), mensaSource, SLOT(load()));
 	reloadTimer->setInterval(1min);
 	reloadTimer->start();
 
 	linzagSource->load();
 	ooevvSource->load();
+	mensaSource->load();
 
 	QQuickView *view = new QQuickView;
 	view->setInitialProperties({
-		{"time", time->getTime()},
+		{"time", QVariant::fromValue(time)},
 		{"departures", QVariant::fromValue(departuresModel)},
+		{"jku_mensa", QVariant::fromValue(jkuMensaModel)},
+		{"khg_mensa", QVariant::fromValue(khgMensaModel)}
 	});
 	view->loadFromModule("TnfInfoscreen", "TnfInfoscreen");
 	view->setResizeMode(QQuickView::SizeRootObjectToView);
-	QQuickItem *root = view->rootObject();
-	QObject::connect(time, &CurrentTime::timeChanged, root, [root, time](){ root->setProperty("time", time->getTime()); });
 	view->showFullScreen();
 
 
