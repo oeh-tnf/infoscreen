@@ -1,34 +1,50 @@
 import QtQuick 6.0
 import QtQuick.Controls 6.0
+import QtQuick.Layouts 6.0
 
-Item {
+ColumnLayout {
 	id: root
 
 	required property var time
+	required property var departures
 
-	LinzAGDepartureSource {
-		id: linzag_source_uni
-		stopId: "at:44:41101"
-	}
-	
-	Timer {
-		interval: 60000
-		running: true
-		repeat: true
-		triggeredOnStart: true
-		onTriggered: linzag_source_uni.load()
+	Rectangle {
+		Layout.fillWidth: true
+		Layout.preferredHeight: 80;
+
+		color: "#000000"
+
+		RowLayout {
+			anchors.fill: parent;
+
+			Item {
+				Layout.fillWidth: true
+				Layout.fillHeight: true
+			}
+
+			Text {
+				Layout.fillHeight: true
+
+				color: "#ffffff"
+
+				padding: 20
+				font.pointSize: 30
+				verticalAlignment: Text.AlignVCenter
+
+				text: root.time.toLocaleTimeString("de-AT")
+			}
+		}
 	}
 
 	TableView {
 		id: departure_table
-		anchors.fill: parent
+
+		Layout.fillWidth: true
+		Layout.fillHeight: true
+
 		animate: false
 		
-		model: LinzAGDepartureModel {
-			id: linzag_model_uni
-			json: linzag_source_uni.json
-			now: root.time
-		}
+		model: root.departures
 		
 		property var columnAlignments: [Text.AlignHCenter, Text.AlignLeft, Text.AlignRight]
 		
