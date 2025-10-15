@@ -27,21 +27,23 @@ QVariant MensaMenuModel::data(const QModelIndex &index, int role) const
 	for (QJsonValue starter : m_json["menuTypes"][index.row()]["menu"]["groupedDishes"]["STARTER"].toArray())
 	{
 		if (!first)
-			menu.append("\n");
+			menu.append("<br>");
 		first = false;
 		menu.append(starter["name"].toString());
 	}
 	for (QJsonValue mainCourse : m_json["menuTypes"][index.row()]["menu"]["groupedDishes"]["MAIN_COURSE"].toArray())
 	{
 		if (!first)
-			menu.append("\n");
+			menu.append("<br>");
 		first = false;
+		menu.append("<strong>");
 		menu.append(mainCourse["name"].toString());
+		menu.append("</strong>");
 	}
 	for (QJsonValue dessert : m_json["menuTypes"][index.row()]["menu"]["groupedDishes"]["DESSERT"].toArray())
 	{
 		if (!first)
-			menu.append("\n");
+			menu.append("<br>");
 		first = false;
 		menu.append(dessert["name"].toString());
 	}
