@@ -71,7 +71,10 @@
   environment.systemPackages = with pkgs; [
     vim
     dtc
-    infoscreen-pkg
+  ];
+
+  fonts.packages = with pkgs; [
+    redhat-official-fonts
   ];
 
   users = {
