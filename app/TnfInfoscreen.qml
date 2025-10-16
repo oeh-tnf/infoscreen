@@ -128,7 +128,7 @@ ColumnLayout {
 								anchors.leftMargin: 20
 								anchors.rightMargin: 20
 								
-								height: (jku_mensa_menu.height - 20 - 20 * (jku_mensa_menu.count-1)) / jku_mensa_menu.count
+								height: (jku_mensa_menu.height - 60) / 3
 								
 								radius: 20
 								color: "#ffffff"
@@ -183,7 +183,7 @@ ColumnLayout {
 								anchors.leftMargin: 20
 								anchors.rightMargin: 20
 								
-								height: (khg_mensa_menu.height - 20 - 20 * (khg_mensa_menu.count-1)) / khg_mensa_menu.count
+								height: (khg_mensa_menu.height - 60) / 3
 								
 								radius: 20
 								color: "#ffffff"

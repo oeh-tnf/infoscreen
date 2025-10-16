@@ -27,7 +27,7 @@ QVariant MensaMenuModel::data(const QModelIndex &index, int role) const
 	for (QJsonValue starter : m_json["menuTypes"][index.row()]["menu"]["groupedDishes"]["STARTER"].toArray())
 	{
 		if (!first)
-			menu.append("<br>");
+			menu.append(" und ");
 		first = false;
 		menu.append(starter["name"].toString());
 	}
