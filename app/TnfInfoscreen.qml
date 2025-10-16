@@ -64,8 +64,9 @@ ColumnLayout {
 				
 				Text {
 					anchors.fill: parent
+					elide: Text.ElideRight
 					text: display
-					padding: 20
+					padding: 10
 					font.pointSize: 40
 					verticalAlignment: Text.AlignVCenter
 					horizontalAlignment: departure_table.columnAlignments[column]
@@ -74,11 +75,11 @@ ColumnLayout {
 			
 			columnWidthProvider: (column) => {
 				if (column == 0) {
-					return 150;
+					return 120;
 				} else if (column == 1) {
-					return departure_table.width - 150 - 150;
+					return departure_table.width - 120 - 120;
 				} else if (column == 2) {
-					return 150;
+					return 120;
 				}
 			}
 			
