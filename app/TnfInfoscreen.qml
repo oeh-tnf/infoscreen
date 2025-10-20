@@ -103,6 +103,8 @@ ColumnLayout {
 						Layout.fillWidth: true
 						Layout.fillHeight: true
 
+						elide: Text.ElideRight
+
 						text: direction
 						padding: 10
 						font.pointSize: 40
@@ -112,8 +114,9 @@ ColumnLayout {
 
 					Text {
 						Layout.fillHeight: true
-						Layout.preferredWidth: 120
-						text: Math.floor((time.getTime() - root.time.time.getTime()) / 1000 / 60)
+						text: time.getTime() - root.time.time.getTime() < 60*60*1000 ?
+							Math.floor((time.getTime() - root.time.time.getTime()) / 1000 / 60) :
+							time.toLocaleTimeString(Qt.locale("de-AT"), Locale.ShortFormat)
 						padding: 10
 						font.pointSize: 40
 						verticalAlignment: Text.AlignVCenter
@@ -128,7 +131,7 @@ ColumnLayout {
 			Layout.fillWidth: true
 
 			Timer {
-				interval: 5000; running: true; repeat: true
+				interval: 10000; running: true; repeat: true
 				onTriggered: parent.currentIndex = (parent.currentIndex + 1) % parent.count;
 			}
 
