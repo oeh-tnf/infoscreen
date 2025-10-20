@@ -29,6 +29,8 @@ QVariant OoevvDepartureModel::data(const QModelIndex &index, int role) const
 			.remove("Linz ")
 			.remove(" via JKU")
 			.replace("Hbf", "Hauptbahnhof");
+	if (role == RealtimeRole)
+		return m_json["jnyL"][index.row()]["stbStop"]["dTimeR"].isString();
 	if (role == TimeRole)
 	{
 		QDate date = QDate::fromString(m_json["jnyL"][index.row()]["date"].toString(), "yyyyMMdd");

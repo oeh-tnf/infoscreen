@@ -14,6 +14,7 @@ public:
 		LineRole = Qt::UserRole,
 		LineColorRole,
 		DirectionRole,
+		RealtimeRole,
 		TimeRole
 	};
 

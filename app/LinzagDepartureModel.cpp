@@ -31,6 +31,8 @@ QVariant LinzagDepartureModel::data(const QModelIndex &index, int role) const
 		return lineColors.value(data(index, LineRole).toString(), "#f37d21");
 	if (role == DirectionRole)
 		return m_json["stopEvents"][index.row()]["transportation"]["destination"]["name"].toString().remove("Linz/Donau ");
+	if (role == RealtimeRole)
+		return m_json["stopEvents"][index.row()]["departureTimeEstimated"].isString();
 	if (role == TimeRole)
 	{
 		QString rawTime = m_json["stopEvents"][index.row()]["departureTimeEstimated"].toString(m_json["stopEvents"][index.row()]["departureTimePlanned"].toString());

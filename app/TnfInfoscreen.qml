@@ -62,6 +62,7 @@ ColumnLayout {
 				required property string line
 				required property string lineColor
 				required property string direction
+				required property bool realtime
 				required property var time
 
 				required property int row
@@ -121,6 +122,21 @@ ColumnLayout {
 						font.pointSize: 40
 						verticalAlignment: Text.AlignVCenter
 						horizontalAlignment: Text.AlignRight
+
+						Rectangle {
+							anchors.top: parent.top
+							anchors.right: parent.right
+							anchors.topMargin: 5
+							anchors.rightMargin: 5
+
+							visible: realtime
+
+							width: 10
+							height: 10
+							radius: 5
+
+							color: "#00ff00"
+						}
 					}
 				}
 			}
