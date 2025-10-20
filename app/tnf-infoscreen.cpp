@@ -46,8 +46,10 @@ int main(int argc, char **argv) {
 
 	DeparturesSortFilterProxyModel *departuresModel = new DeparturesSortFilterProxyModel();
 	QObject::connect(time, SIGNAL(timeChanged(QDateTime)), departuresModel, SLOT(setTime(QDateTime)));
+	departuresModel->setTime(time->getTime());
 	departuresModel->setSourceModel(allDeparturesModel);
-	departuresModel->sort(2);
+	departuresModel->setSortRole(DepartureModel::TimeRole);
+	departuresModel->sort(0);
 	
 	MensaMenuSource *mensaSource = new MensaMenuSource();
 

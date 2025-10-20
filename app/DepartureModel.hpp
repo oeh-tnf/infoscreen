@@ -12,6 +12,7 @@ class DepartureModel : public QAbstractListModel
 public:
 	enum {
 		LineRole = Qt::UserRole,
+		LineColorRole,
 		DirectionRole,
 		TimeRole
 	};

@@ -8,6 +8,7 @@ QHash<int, QByteArray> DepartureModel::roleNames() const
 {
 	return {
 		{LineRole, "line"},
+		{LineColorRole, "lineColor"},
 		{DirectionRole, "direction"},
 		{TimeRole, "time"}
 	};

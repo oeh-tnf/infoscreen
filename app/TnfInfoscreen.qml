@@ -53,13 +53,14 @@ ColumnLayout {
 			Layout.fillWidth: true
 
 			clip: true
-			
+
 			model: root.departures
 			
 			property var columnAlignments: [Text.AlignHCenter, Text.AlignLeft, Text.AlignRight]
 			
 			delegate: Rectangle {
 				required property string line
+				required property string lineColor
 				required property string direction
 				required property var time
 
@@ -73,14 +74,29 @@ ColumnLayout {
 				RowLayout {
 					anchors.fill: parent
 
-					Text {
+					Item {
 						Layout.fillHeight: true
-						Layout.preferredWidth: 120
-						text: line
-						padding: 10
-						font.pointSize: 40
-						verticalAlignment: Text.AlignVCenter
-						horizontalAlignment: Text.AlignHCenter
+						Layout.preferredWidth: 130
+						Rectangle {
+							anchors.fill: parent
+							anchors.topMargin: 10
+							anchors.bottomMargin: 10
+							anchors.leftMargin: 10
+
+							color: lineColor
+
+							radius: 20
+
+							Text {
+								anchors.fill: parent
+								color: '#ffffff'
+								text: line
+								padding: 10
+								font.pointSize: 40
+								verticalAlignment: Text.AlignVCenter
+								horizontalAlignment: Text.AlignHCenter
+							}
+						}
 					}
 
 					Text {

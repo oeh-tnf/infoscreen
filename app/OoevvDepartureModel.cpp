@@ -22,6 +22,8 @@ QVariant OoevvDepartureModel::data(const QModelIndex &index, int role) const
 {
 	if (role == LineRole)
 		return m_json["common"]["prodL"][m_json["jnyL"][index.row()]["prodX"].toInt(-1)]["number"].toString();
+	if (role == LineColorRole)
+		return "#e94c4b";
 	if (role == DirectionRole)
 		return m_json["jnyL"][index.row()]["dirTxt"].toString()
 			.remove("Linz ")
@@ -31,7 +33,7 @@ QVariant OoevvDepartureModel::data(const QModelIndex &index, int role) const
 	{
 		QDate date = QDate::fromString(m_json["jnyL"][index.row()]["date"].toString(), "yyyyMMdd");
 		QString rawTime = m_json["jnyL"][index.row()]["stbStop"]["dTimeR"].toString(m_json["jnyL"][index.row()]["stbStop"]["dTimeS"].toString());
-		return QTime::fromString(rawTime, "hhmmss");
+		return QDateTime(date, QTime::fromString(rawTime, "hhmmss"));
 	}
 	return QVariant();
 }
