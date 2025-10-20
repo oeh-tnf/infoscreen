@@ -30,6 +30,11 @@ QVariant MensaMenuModel::data(const QModelIndex &index, int role) const
 			menu.append(" und ");
 		first = false;
 		menu.append(starter["name"].toString());
+		if (!starter["sides"].isNull())
+		{
+			menu.append(" ");
+			menu.append(starter["sides"].toString());
+		}
 	}
 	for (QJsonValue mainCourse : m_json["menuTypes"][index.row()]["menu"]["groupedDishes"]["MAIN_COURSE"].toArray())
 	{
@@ -39,6 +44,11 @@ QVariant MensaMenuModel::data(const QModelIndex &index, int role) const
 		menu.append("<strong>");
 		menu.append(mainCourse["name"].toString());
 		menu.append("</strong>");
+		if (!mainCourse["sides"].isNull())
+		{
+			menu.append(" ");
+			menu.append(mainCourse["sides"].toString());
+		}
 	}
 	for (QJsonValue dessert : m_json["menuTypes"][index.row()]["menu"]["groupedDishes"]["DESSERT"].toArray())
 	{
@@ -46,6 +56,11 @@ QVariant MensaMenuModel::data(const QModelIndex &index, int role) const
 			menu.append("<br>");
 		first = false;
 		menu.append(dessert["name"].toString());
+		if (!dessert["sides"].isNull())
+		{
+			menu.append(" ");
+			menu.append(dessert["sides"].toString());
+		}
 	}
 	return menu;
 }

@@ -90,113 +90,118 @@ ColumnLayout {
 			Layout.fillHeight: true
 			Layout.fillWidth: true
 
-			ColumnLayout {
-				spacing: 0
+			Timer {
+				interval: 5000; running: true; repeat: true
+				onTriggered: parent.currentIndex = (parent.currentIndex + 1) % parent.count;
+			}
 
-				Rectangle {
-					Layout.fillWidth: true
-					Layout.fillHeight: true
-					
-					color: "#fbb601"
-					ColumnLayout {
-						anchors.fill: parent
-						
-						Text {
-							Layout.fillWidth: true
+			Rectangle {
+				Layout.fillWidth: true
+				Layout.fillHeight: true
 
-							padding: 20
+				color: "#fbb601"
+				ColumnLayout {
+					anchors.fill: parent
 
+					Text {
+						Layout.fillWidth: true
+
+						padding: 20
+
+						color: "#ffffff"
+						font.weight: Font.Bold
+						font.pointSize: 30
+
+						text: "JKU Mensa"
+					}
+
+					ListView {
+						id: jku_mensa_menu
+
+						Layout.fillWidth: true
+						Layout.fillHeight: true
+
+						spacing: 20
+
+						model: jku_mensa
+
+						delegate: Rectangle {
+							anchors.left: parent.left
+							anchors.right: parent.right
+							anchors.leftMargin: 20
+							anchors.rightMargin: 20
+
+							height: (jku_mensa_menu.height - (jku_mensa_menu.count*20)) / jku_mensa_menu.count
+
+							radius: 20
 							color: "#ffffff"
-							font.weight: Font.Bold
-							font.pointSize: 30
-							
-							text: "JKU Mensa"
-						}
-						
-						ListView {
-							id: jku_mensa_menu
-							
-							Layout.fillWidth: true
-							Layout.fillHeight: true
-							
-							spacing: 20
-							
-							model: jku_mensa
-							
-							delegate: Rectangle {
-								anchors.left: parent.left
-								anchors.right: parent.right
-								anchors.leftMargin: 20
-								anchors.rightMargin: 20
-								
-								height: (jku_mensa_menu.height - 60) / 3
-								
-								radius: 20
-								color: "#ffffff"
-								
-								Text {
-									anchors.fill: parent
-									verticalAlignment: Text.AlignVCenter
-									padding: 30
-									color: "#000000"
-									font.pointSize: 20
-									text: display
-								}
+
+							Text {
+								anchors.fill: parent
+								clip: true
+								verticalAlignment: Text.AlignVCenter
+								wrapMode: Text.WordWrap
+								padding: 30
+								color: "#000000"
+								font.pointSize: 20
+								text: display
 							}
 						}
 					}
 				}
-				
-				Rectangle {
-					Layout.fillWidth: true
-					Layout.fillHeight: true
-					
-					color: "#ac1410"
-					
-					ColumnLayout {
-						anchors.fill: parent
+			}
 
-						Text {
-							Layout.fillWidth: true
+			Rectangle {
+				Layout.fillWidth: true
+				Layout.fillHeight: true
 
-							padding: 20
+				color: "#ac1410"
 
+				ColumnLayout {
+					anchors.fill: parent
+
+					Text {
+						Layout.fillWidth: true
+
+						padding: 20
+
+						color: "#ffffff"
+						font.weight: Font.Bold
+						font.pointSize: 30
+
+						text: "KHG Mensa"
+					}
+
+					ListView {
+						id: khg_mensa_menu
+
+						Layout.fillWidth: true
+						Layout.fillHeight: true
+
+						spacing: 20
+
+						model: khg_mensa
+
+						delegate: Rectangle {
+							anchors.left: parent.left
+							anchors.right: parent.right
+							anchors.leftMargin: 20
+							anchors.rightMargin: 20
+
+							height: (khg_mensa_menu.height - (khg_mensa_menu.count*20)) / khg_mensa_menu.count
+
+							radius: 20
 							color: "#ffffff"
-							font.weight: Font.Bold
-							font.pointSize: 30
-							
-							text: "KHG Mensa"
-						}
-						
-						ListView {
-							id: khg_mensa_menu
-							
-							Layout.fillWidth: true
-							Layout.fillHeight: true
-							
-							spacing: 20
-							
-							model: khg_mensa
-							
-							delegate: Rectangle {
-								anchors.left: parent.left
-								anchors.right: parent.right
-								anchors.leftMargin: 20
-								anchors.rightMargin: 20
-								
-								height: (khg_mensa_menu.height - 60) / 3
-								
-								radius: 20
-								color: "#ffffff"
-								
-								Text {
-									anchors.fill: parent
-									verticalAlignment: Text.AlignVCenter
-									padding: 30
-									color: "#000000"
-									font.pointSize: 20
-									text: display
-								}
+
+							Text {
+								anchors.fill: parent
+								clip: true
+								verticalAlignment: Text.AlignVCenter
+								wrapMode: Text.WordWrap
+								padding: 30
+								color: "#000000"
+								font.pointSize: 20
+								text: display
 							}
 						}
 					}

@@ -68,6 +68,8 @@
     };
   };
 
+  time.timeZone = "Europe/Vienna";
+
   environment.systemPackages = with pkgs; [
     vim
     dtc
