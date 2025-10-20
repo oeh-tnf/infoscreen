@@ -35,7 +35,7 @@ ColumnLayout {
 				font.pointSize: 30
 				verticalAlignment: Text.AlignVCenter
 
-				text: root.time.time.toLocaleTimeString("de-AT")
+				text: root.time.time.toLocaleTimeString(Qt.locale("de-AT"), Locale.ShortFormat)
 			}
 		}
 	}
@@ -131,7 +131,7 @@ ColumnLayout {
 							anchors.leftMargin: 20
 							anchors.rightMargin: 20
 
-							height: (jku_mensa_menu.height - (jku_mensa_menu.count*20)) / jku_mensa_menu.count
+							height: children[0].implicitHeight
 
 							radius: 20
 							color: "#ffffff"
@@ -188,7 +188,7 @@ ColumnLayout {
 							anchors.leftMargin: 20
 							anchors.rightMargin: 20
 
-							height: (khg_mensa_menu.height - (khg_mensa_menu.count*20)) / khg_mensa_menu.count
+							height: children[0].implicitHeight
 
 							radius: 20
 							color: "#ffffff"
