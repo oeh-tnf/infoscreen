@@ -36,19 +36,16 @@ int main(int argc, char **argv) {
 
 	LinzagDepartureModel *linzagModel = new LinzagDepartureModel();
 	QObject::connect(linzagSource, SIGNAL(jsonChanged(QJsonObject)), linzagModel, SLOT(setJson(QJsonObject)));
-	QObject::connect(time, SIGNAL(timeChanged(QDateTime)), linzagModel, SLOT(setTime(QDateTime)));
-	linzagModel->setTime(time->getTime());
 
 	OoevvDepartureModel *ooevvModel = new OoevvDepartureModel();
 	QObject::connect(ooevvSource, SIGNAL(jsonChanged(QJsonObject)), ooevvModel, SLOT(setJson(QJsonObject)));
-	QObject::connect(time, SIGNAL(timeChanged(QDateTime)), ooevvModel, SLOT(setTime(QDateTime)));
-	ooevvModel->setTime(time->getTime());
 
 	QConcatenateTablesProxyModel *allDeparturesModel = new QConcatenateTablesProxyModel();
 	allDeparturesModel->addSourceModel(linzagModel);
 	allDeparturesModel->addSourceModel(ooevvModel);
 
 	DeparturesSortFilterProxyModel *departuresModel = new DeparturesSortFilterProxyModel();
+	QObject::connect(time, SIGNAL(timeChanged(QDateTime)), departuresModel, SLOT(setTime(QDateTime)));
 	departuresModel->setSourceModel(allDeparturesModel);
 	departuresModel->sort(2);
 	

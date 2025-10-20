@@ -46,13 +46,12 @@ ColumnLayout {
 
 		spacing: 0
 
-		TableView {
-			id: departure_table
+		ListView {
+			id: departures
 
 			Layout.fillHeight: true
 			Layout.fillWidth: true
 
-			animate: false
 			clip: true
 			
 			model: root.departures
@@ -60,30 +59,52 @@ ColumnLayout {
 			property var columnAlignments: [Text.AlignHCenter, Text.AlignLeft, Text.AlignRight]
 			
 			delegate: Rectangle {
+				required property string line
+				required property string direction
+				required property var time
+
+				required property int row
+
+				height: 100
+				width: parent.width
+
 				color: row % 2 == 0 ? "#ffffff" : "#efefef"
-				
-				Text {
+
+				RowLayout {
 					anchors.fill: parent
-					elide: Text.ElideRight
-					text: display
-					padding: 10
-					font.pointSize: 40
-					verticalAlignment: Text.AlignVCenter
-					horizontalAlignment: departure_table.columnAlignments[column]
+
+					Text {
+						Layout.fillHeight: true
+						Layout.preferredWidth: 120
+						text: line
+						padding: 10
+						font.pointSize: 40
+						verticalAlignment: Text.AlignVCenter
+						horizontalAlignment: Text.AlignHCenter
+					}
+
+					Text {
+						Layout.fillWidth: true
+						Layout.fillHeight: true
+
+						text: direction
+						padding: 10
+						font.pointSize: 40
+						verticalAlignment: Text.AlignVCenter
+						horizontalAlignment: Text.AlignLeft
+					}
+
+					Text {
+						Layout.fillHeight: true
+						Layout.preferredWidth: 120
+						text: Math.floor((time.getTime() - root.time.time.getTime()) / 1000 / 60)
+						padding: 10
+						font.pointSize: 40
+						verticalAlignment: Text.AlignVCenter
+						horizontalAlignment: Text.AlignRight
+					}
 				}
 			}
-			
-			columnWidthProvider: (column) => {
-				if (column == 0) {
-					return 120;
-				} else if (column == 1) {
-					return departure_table.width - 120 - 120;
-				} else if (column == 2) {
-					return 120;
-				}
-			}
-			
-			rowHeightProvider: (row) => 100 
 		}
 		
 		StackLayout {
