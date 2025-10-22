@@ -135,7 +135,7 @@ ColumnLayout {
 							height: 10
 							radius: 5
 
-							color: "#00ff00"
+							color: "#00d000"
 						}
 					}
 				}
