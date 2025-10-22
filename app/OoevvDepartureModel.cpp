@@ -23,7 +23,7 @@ QVariant OoevvDepartureModel::data(const QModelIndex &index, int role) const
 	if (role == LineRole)
 		return m_json["common"]["prodL"][m_json["jnyL"][index.row()]["prodX"].toInt(-1)]["number"].toString();
 	if (role == LineColorRole)
-		return "#e94c4b";
+		return "#8b8b8b";
 	if (role == DirectionRole)
 		return m_json["jnyL"][index.row()]["dirTxt"].toString()
 			.remove("Linz ")
