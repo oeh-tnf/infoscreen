@@ -20,6 +20,7 @@ int LinzagDepartureModel::rowCount([[maybe_unused]] const QModelIndex &parent) c
 static QHash<QString,QString> lineColors = {
 	{"1", "#ed3f80"},
 	{"2", "#c57eb5"},
+	{"N82", "#c57eb5"},
 	{"77", "#945437"}
 };
 
