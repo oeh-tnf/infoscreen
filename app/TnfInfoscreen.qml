@@ -1,6 +1,7 @@
 import QtQuick 6.0
 import QtQuick.Controls 6.0
 import QtQuick.Layouts 6.0
+import QtQuick.Shapes 1.10
 
 ColumnLayout {
 	id: root
@@ -68,7 +69,8 @@ ColumnLayout {
 				required property int row
 
 				height: 100
-				width: parent.width
+				anchors.left: parent.left
+				anchors.right: parent.right
 
 				color: row % 2 == 0 ? "#ffffff" : "#efefef"
 
@@ -123,19 +125,21 @@ ColumnLayout {
 						verticalAlignment: Text.AlignVCenter
 						horizontalAlignment: Text.AlignRight
 
-						Rectangle {
+						Shape {
 							anchors.top: parent.top
 							anchors.right: parent.right
-							anchors.topMargin: 5
-							anchors.rightMargin: 5
+							width: 30
+							height: 30
 
 							visible: realtime
 
-							width: 10
-							height: 10
-							radius: 5
-
-							color: "#00d000"
+							ShapePath {
+								fillColor: "#00d000"
+								strokeWidth: -1
+								startX: 0; startY: 0
+								PathLine { x: 30; y: 30 }
+								PathLine { x: 30; y: 0 }
+							}
 						}
 					}
 				}
