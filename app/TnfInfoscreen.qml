@@ -152,7 +152,11 @@ ColumnLayout {
 
 			Timer {
 				interval: 10000; running: true; repeat: true
-				onTriggered: parent.currentIndex = (parent.currentIndex + 1) % parent.count;
+				onTriggered: () => {
+					parent.currentIndex = (parent.currentIndex + 1) % parent.count;
+					const teletext_page = teletext.pages[Math.floor(Math.random()*teletext.pages.length)];
+					teletext.source = "https://appmeta.orf.at/teletext/orf1/"+teletext_page+"_0001.png";
+				}
 			}
 
 			Rectangle {
@@ -265,6 +269,82 @@ ColumnLayout {
 							}
 						}
 					}
+				}
+			}
+
+			Rectangle {
+				Layout.fillWidth: true
+				Layout.fillHeight: true
+
+				color: "#000000"
+
+				Image {
+					id: teletext
+
+					property var pages: [
+						101, // Topstory Politik
+						102, // Topstory Chronik
+						103, // Topstory Leute
+						104, // Topstory Wirtschaft
+						105, // Topstory Sport
+						107, // Topstory Show
+						108, // Topstory Multimedia
+						110, // Topstory Kultur
+						113, // News Österreich + EU
+						114,
+						115,
+						116,
+						117,
+						118,
+						119,
+						120,
+						121,
+						122,
+						123,
+						124,
+						125,
+						127, // News International
+						128,
+						129,
+						130,
+						131,
+						132,
+						133,
+						134,
+						136, // Chronik
+						137,
+						138,
+						139,
+						140,
+						141,
+						142,
+						143,
+						144,
+						146, // Leute
+						147,
+						148,
+						149,
+						191, // News Kultur
+						192,
+						193, // News Show
+						194,
+						195,
+					];
+
+					onStatusChanged: {
+						if (teletext.status == Image.Error) {
+							const teletext_page = teletext.pages[Math.floor(Math.random()*teletext.pages.length)];
+							teletext.source = "https://appmeta.orf.at/teletext/orf1/"+teletext_page+"_0001.png";
+						}
+					}
+
+					anchors.fill: parent
+
+					cache: false
+					sourceSize.width: 720
+					sourceSize.height: 432
+					sourceClipRect: Qt.rect(18, 0, 702, 414)
+					smooth: false
 				}
 			}
 		}
