@@ -152,11 +152,7 @@ ColumnLayout {
 
 			Timer {
 				interval: 10000; running: true; repeat: true
-				onTriggered: () => {
-					parent.currentIndex = (parent.currentIndex + 1) % parent.count;
-					const teletext_page = teletext.pages[Math.floor(Math.random()*teletext.pages.length)];
-					teletext.source = "https://appmeta.orf.at/teletext/orf1/"+teletext_page+"_0001.png";
-				}
+				onTriggered: parent.currentIndex = (parent.currentIndex + 1) % parent.count
 			}
 
 			Rectangle {
@@ -277,6 +273,13 @@ ColumnLayout {
 				Layout.fillHeight: true
 
 				color: "#000000"
+
+				StackLayout.onIsCurrentItemChanged: {
+					if (StackLayout.isCurrentItem) {
+						const teletext_page = teletext.pages[Math.floor(Math.random()*teletext.pages.length)];
+						teletext.source = "https://appmeta.orf.at/teletext/orf1/"+teletext_page+"_0001.png";
+					}
+				}
 
 				Image {
 					id: teletext
