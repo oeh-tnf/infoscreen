@@ -339,6 +339,7 @@ ColumnLayout {
 					}
 
 					anchors.fill: parent
+					anchors.leftMargin: 18
 
 					cache: false
 					sourceSize.width: 720
