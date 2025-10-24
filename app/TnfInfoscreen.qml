@@ -63,6 +63,7 @@ ColumnLayout {
 				required property string line
 				required property string lineColor
 				required property string direction
+				required property bool cancelled
 				required property bool realtime
 				required property var time
 
@@ -111,6 +112,7 @@ ColumnLayout {
 						text: direction
 						padding: 10
 						font.pointSize: 40
+						font.strikeout: cancelled
 						verticalAlignment: Text.AlignVCenter
 						horizontalAlignment: Text.AlignLeft
 					}
@@ -122,6 +124,7 @@ ColumnLayout {
 							time.toLocaleTimeString(Qt.locale("de-AT"), Locale.ShortFormat)
 						padding: 10
 						font.pointSize: 40
+						font.strikeout: cancelled
 						verticalAlignment: Text.AlignVCenter
 						horizontalAlignment: Text.AlignRight
 

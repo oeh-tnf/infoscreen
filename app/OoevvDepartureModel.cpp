@@ -29,6 +29,8 @@ QVariant OoevvDepartureModel::data(const QModelIndex &index, int role) const
 			.remove("Linz ")
 			.remove(" via JKU")
 			.replace("Hbf", "Hauptbahnhof");
+	if (role == CancelledRole)
+		return false;
 	if (role == RealtimeRole)
 		return m_json["jnyL"][index.row()]["stbStop"]["dTimeR"].isString();
 	if (role == TimeRole)
