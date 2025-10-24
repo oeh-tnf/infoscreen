@@ -93,6 +93,13 @@
     };
   };
 
+  services.logind = {
+    extraConfig = ''
+      NAutoVTs=0
+      ReserveVT=N
+    '';
+  };
+
   systemd.services.tnf-infoscreen = {
     enable = true;
     after = [ "network.target" ];
