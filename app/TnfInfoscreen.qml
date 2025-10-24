@@ -354,6 +354,26 @@ ColumnLayout {
 					smooth: false
 				}
 			}
+
+			Rectangle {
+				Layout.fillWidth: true
+				Layout.fillHeight: true
+
+				color: "#000000"
+
+				StackLayout.onIsCurrentItemChanged: {
+					if (StackLayout.isCurrentItem) {
+						cat.source = "";
+						cat.source = "https://cataas.com/cat?width=" + parent.width + "&height=" + parent.height;
+					}
+				}
+
+				Image {
+					id: cat
+
+					cache: false
+				}
+			}
 		}
 	}
 }
