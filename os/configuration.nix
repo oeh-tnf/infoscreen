@@ -10,6 +10,9 @@
     extraModprobeConfig = ''
       options brcmfmac roamoff=1 feature_disable=0x82000
     '';
+    kernelParams = [
+      "systemd.set_credential=tty.virtual.tty1.agetty.autologin:infoscreen"
+    ];
   };
 
   hardware.deviceTree.overlays = [
@@ -84,6 +87,9 @@
     users.root = {
       openssh.authorizedKeys.keys = builtins.concatMap (admin: admin.sshKeys) (builtins.attrValues (import ../admins));
     };
+    users.infoscreen = {
+      isNormalUser = true;
+    };
   };
 
   services.openssh = {
@@ -93,21 +99,37 @@
     };
   };
 
-  services.logind = {
-    extraConfig = ''
-      NAutoVTs=0
-      ReserveVT=N
-    '';
+  programs.uwsm = {
+    enable = true;
+    waylandCompositors = {};
   };
 
-  systemd.services.tnf-infoscreen = {
+  environment.loginShellInit = let
+    uwsmFinalize = pkgs.writeShellScript "uwsmFinalize.sh" ''
+      ${pkgs.uwsm}/bin/uwsm finalize
+    '';
+    westonConfig = pkgs.writeText "weston.ini" ''
+      [core]
+      shell=kiosk-shell.so
+      backend=drm
+      renderer=pixman
+      [autolaunch]
+      path=${uwsmFinalize}
+    '';
+  in ''
+    if [ ''${XDG_VTNR:-0} -eq 1 ]
+    then
+      exec ${pkgs.uwsm}/bin/uwsm start -- ${pkgs.weston}/bin/weston --config=${westonConfig}
+    fi
+  '';
+
+  systemd.user.services.tnf-infoscreen = {
     enable = true;
-    after = [ "network.target" ];
-    wantedBy = [ "default.target" ];
+    wantedBy = [ "graphical-session.target" ];
     serviceConfig = {
         Type = "simple";
         Restart = "always";
-        ExecStart = "${infoscreen-pkg}/bin/tnf-infoscreen -platform linuxfb";
+        ExecStart = "${infoscreen-pkg}/bin/tnf-infoscreen";
     };
   };
 
