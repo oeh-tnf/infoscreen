@@ -270,7 +270,7 @@ ColumnLayout {
 					}
 				}
 			}
-
+/*
 			Rectangle {
 				Layout.fillWidth: true
 				Layout.fillHeight: true
@@ -374,6 +374,7 @@ ColumnLayout {
 					cache: false
 				}
 			}
+*/
 		}
 	}
 }
